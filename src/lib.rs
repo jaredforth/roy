@@ -35,7 +35,7 @@ impl Client {
     /// use roy::Client;
     /// use tokio_test::block_on;
     ///
-    /// let c = Client::new("https://httpbin.org/".to_string());
+    /// let c = Client::new("https://httpbin.org".to_string());
     /// assert_eq!(block_on(c.post("/post", "{data}")).is_some(), true);
     /// ```
     pub async fn post<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
@@ -52,7 +52,7 @@ impl Client {
     /// use roy::Client;
     /// use tokio_test::block_on;
     ///
-    /// let c = Client::new("https://httpbin.org/".to_string());
+    /// let c = Client::new("https://httpbin.org".to_string());
     /// assert_eq!(block_on(c.delete("/delete")).is_some(), true);
     /// ```
     pub async fn delete(&self, endpoint: &str) -> Option<Response> {
@@ -62,16 +62,51 @@ impl Client {
         Some(res)
     }
     /// Generic function to PATCH data to an endpoint
-    pub async fn patch_api<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://httpbin.org".to_string());
+    /// assert_eq!(block_on(c.patch("/patch", "{data}")).is_some(), true);
+    /// ```
+    pub async fn patch<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
         let res = self.client.patch(&format_url(endpoint))
             .json(&data)
             .send()
             .await.ok()?;
         Some(res)
     }
+    /// Generic function to PUT data to an endpoint
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://httpbin.org".to_string());
+    /// assert_eq!(block_on(c.put("/put", "{data}")).is_some(), true);
+    /// ```
+        pub async fn put<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
+            let res = self.client.put(&format_url(endpoint))
+                .json(&data)
+                .send()
+                .await.ok()?;
+            Some(res)
+        }
     /// Generic function to send a GET request to an endpoint
-    pub async fn get_api(&self, endpoint: &str) -> Option<Response> {
-        let res = self.client.get(endpoint)
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://httpbin.org".to_string());
+    /// assert_eq!(block_on(c.get("/get")).is_some(), true);
+    /// ```
+    pub async fn get(&self, endpoint: &str) -> Option<Response> {
+        let res = self.client.get(&format_url(endpoint))
             .send()
             .await.ok()?;
         Some(res)
