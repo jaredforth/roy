@@ -29,18 +29,34 @@ impl Client {
         }
     }
     /// Generic function to POST data to an endpoint
-    pub async fn post_api<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://httpbin.org/".to_string());
+    /// assert_eq!(block_on(c.post("/post", "{data}")).is_some(), true);
+    /// ```
+    pub async fn post<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
         let res = self.client.post(&format_url(endpoint))
-            .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5fdXNlciJ9.Re2Ci5f4u9Xtp6p0bKy71UPtMC94JS43IVDhX7fHZTE")
             .json(&data)
             .send()
             .await.ok()?;
         Some(res)
     }
     /// Generic function to DELETE to an endpoint
-    pub async fn delete_api(&self, endpoint: &str) -> Option<Response> {
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://httpbin.org/".to_string());
+    /// assert_eq!(block_on(c.delete("/delete")).is_some(), true);
+    /// ```
+    pub async fn delete(&self, endpoint: &str) -> Option<Response> {
         let res = self.client.delete(&format_url(endpoint))
-            .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5fdXNlciJ9.Re2Ci5f4u9Xtp6p0bKy71UPtMC94JS43IVDhX7fHZTE")
             .send()
             .await.ok()?;
         Some(res)
@@ -48,7 +64,6 @@ impl Client {
     /// Generic function to PATCH data to an endpoint
     pub async fn patch_api<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
         let res = self.client.patch(&format_url(endpoint))
-            .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5fdXNlciJ9.Re2Ci5f4u9Xtp6p0bKy71UPtMC94JS43IVDhX7fHZTE")
             .json(&data)
             .send()
             .await.ok()?;
@@ -69,6 +84,7 @@ impl Client {
 ///
 /// ```
 /// use roy::format_url;
+///
 ///
 /// assert_eq!(format_url("test"), "https://rivaldata.tech/test")
 /// ```
