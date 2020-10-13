@@ -1,9 +1,11 @@
-use reqwest::Response;
+use reqwest::{Response, header};
 
 /// The HTTP client
 pub struct Client {
+    /// API base URL
     pub base_url: String,
-    client: reqwest::Client
+    /// The reqwest wrapper
+    client: reqwest::Client,
 }
 
 impl Client {
@@ -12,6 +14,18 @@ impl Client {
         Client {
             base_url,
             client: reqwest::Client::new()
+        }
+    }
+    /// Create a new instance of an authenticated `Client`
+    pub fn new_auth(base_url: String, auth_token: &'static str) -> Client {
+        let mut headers = header::HeaderMap::new();
+        headers.insert(header::AUTHORIZATION, header::HeaderValue::from_static(auth_token));
+        Client {
+            base_url,
+            client: reqwest::Client::builder()
+                .default_headers(headers)
+                .build()
+                .unwrap()
         }
     }
     /// Generic function to POST data to an endpoint
@@ -54,7 +68,7 @@ impl Client {
 /// ## Usage:
 ///
 /// ```
-/// use polliwog::client::format_url;
+/// use roy::format_url;
 ///
 /// assert_eq!(format_url("test"), "https://rivaldata.tech/test")
 /// ```
