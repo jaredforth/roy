@@ -10,7 +10,7 @@ repository = "https://github.com/jaredforth/roy"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 documentation = "https://docs.rs/roy"
-keywords = ["http", "api", "rest", "restful", "restful-api", "client", "request"]
+keywords = ["http", "api", "rest", "restful", "restful-api"]
 categories = ["web-programming::http-client", "web-programming"]
 
 [badges]
