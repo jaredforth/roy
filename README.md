@@ -20,15 +20,6 @@
 
 This crate is a high-level library for consuming RESTful APIs.
 
-## Table of Contents
-
-- [roy](#roy)
-  - [About](#about)
-  - [Table of Contents](#table-of-contents)
-  - [Installation and Usage](#installation-and-usage)
-    - [Installation](#installation)
-  - [License](#license)
-
 Documentation:
 
 - [API Reference](https://docs.rs/roy)
