@@ -32,7 +32,7 @@ impl Client {
     /// use tokio_test::block_on;
     ///
     /// let c = Client::new_auth("https://httpbin.org".to_string(), "");
-    /// assert_eq!(block_on(c.get("/bearer")).is_some(), true);
+    /// assert_eq!(block_on(c.get("/bearer", false)).is_some(), true);
     /// ```
     pub fn new_auth(base_url: String, auth_token: &'static str) -> Client {
         let mut headers = header::HeaderMap::new();
@@ -120,12 +120,20 @@ impl Client {
     /// use tokio_test::block_on;
     ///
     /// let c = Client::new("https://httpbin.org".to_string());
-    /// assert_eq!(block_on(c.get("/get")).is_some(), true);
+    /// assert_eq!(block_on(c.get("/get", false)).is_some(), true);
     /// ```
-    pub async fn get(&self, endpoint: &str) -> Option<Response> {
-        let res = self.client.get(&format_url(endpoint))
-            .send()
-            .await.ok()?;
+    pub async fn get(&self, endpoint: &str, single: bool) -> Option<Response> {
+        let res;
+        if single {
+            res = self.client.get(&format_url(endpoint))
+                .header("Accept", "application/vnd.pgrst.object+json")
+                .send()
+                .await.ok()?;
+        } else {
+            res = self.client.get(&format_url(endpoint))
+                .send()
+                .await.ok()?;
+        }
         Some(res)
     }
 }
