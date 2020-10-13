@@ -1,3 +1,12 @@
+[![Build Status](https://travis-ci.com/jaredforth/roy.svg?branch=master)](https://travis-ci.com/jaredforth/roy)
+[![Build status](https://ci.appveyor.com/api/projects/status/ijwnxxl37ivyy67f?svg=true)](https://ci.appveyor.com/project/jaredforth/roy)
+[![Crate](https://img.shields.io/crates/v/roy.svg)](https://crates.io/crates/roy)
+[![API](https://docs.rs/roy/badge.svg)](https://docs.rs/roy)
+![Crates.io](https://img.shields.io/crates/l/roy)
+![Crates.io](https://img.shields.io/crates/v/roy)
+![GitHub top language](https://img.shields.io/github/languages/top/jaredforth/roy)
+![Crates.io](https://img.shields.io/crates/d/roy)
+
 # roy
 
 - [roy](#roy)
