@@ -9,7 +9,15 @@ pub struct Client {
 }
 
 impl Client {
-    /// Create a new instance of `Client`
+    /// Create a new instance of a `Client`
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    ///
+    /// let c = Client::new("https://httpbin.org".to_string());
+    /// assert_eq!(c.base_url, "https://httpbin.org");
+    /// ```
     pub fn new(base_url: String) -> Client {
         Client {
             base_url,
@@ -17,6 +25,15 @@ impl Client {
         }
     }
     /// Create a new instance of an authenticated `Client`
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new_auth("https://httpbin.org".to_string(), "");
+    /// assert_eq!(block_on(c.get("/bearer")).is_some(), true);
+    /// ```
     pub fn new_auth(base_url: String, auth_token: &'static str) -> Client {
         let mut headers = header::HeaderMap::new();
         headers.insert(header::AUTHORIZATION, header::HeaderValue::from_static(auth_token));
