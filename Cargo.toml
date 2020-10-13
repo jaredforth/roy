@@ -10,8 +10,8 @@ repository = "https://github.com/jaredforth/roy"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 documentation = "https://docs.rs/roy"
-keywords = ["url", "clean", "status-code", "formating"]
-categories = ["web-programming"]
+keywords = ["http", "api", "rest", "restful", "restful-api", "client", "request"]
+categories = ["web-programming::http-client", "web-programming"]
 
 [badges]
 travis-ci = { repository = "jaredforth/roy" }
