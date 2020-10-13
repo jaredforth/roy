@@ -42,3 +42,9 @@ Apache License (Version 2.0).
 
 See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT), and
 [COPYRIGHT](COPYRIGHT) for details.
+
+## Why the name Roy?
+
+This crate is named after [Roy Fielding](https://en.wikipedia.org/wiki/Roy_Fielding), who defined Representational State Transfer. According to [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer#History): 
+
+> Roy Fielding defined REST in his 2000 PhD dissertation "Architectural Styles and the Design of Network-based Software Architectures" at UC Irvine. He developed the REST architectural style in parallel with HTTP 1.1 of 1996–1999, based on the existing design of HTTP 1.0 of 1996.
