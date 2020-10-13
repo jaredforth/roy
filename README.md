@@ -11,10 +11,9 @@
 
 - [roy](#roy)
   - [About](#about)
-  - [Table of Contents](#table-of-contents)
-  - [Installation and Usage](#installation-and-usage)
-    - [Installation](#installation)
+  - [Installation](#installation)
   - [License](#license)
+  - [Why the name Roy?](#why-the-name-roy)
 
 ## About
 
@@ -24,9 +23,7 @@ Documentation:
 
 - [API Reference](https://docs.rs/roy)
 
-## Installation and Usage
-
-### Installation
+## Installation
 
 Add this to your `Cargo.toml`:
 
