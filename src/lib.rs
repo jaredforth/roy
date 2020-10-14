@@ -12,7 +12,7 @@
 //! ```
 //! use roy::Client; // import into scope
 //! let c = roy::Client::new("https://httpbin.org".to_string());  // Instantiate `Client` with your API's base URL
-//! c.get("/status/200", false); // Make a GET request to your endpoint
+//! c.get("/get", false); // Make a GET request to your endpoint
 //! ```
 //!
 //! **roy** also has methods that support POST, PUT, PATCH, and DELETE http verbs,
