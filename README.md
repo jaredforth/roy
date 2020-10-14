@@ -11,6 +11,7 @@
 - [roy](#roy)
   - [About](#about)
   - [Installation](#installation)
+  - [Usage](#usage)
   - [License](#license)
   - [Why the name Roy?](#why-the-name-roy)
 
@@ -29,6 +30,15 @@ Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
 roy = "0.1"
+```
+
+## Usage
+
+```rust
+use roy::Client; // import into scope
+
+let c = roy::Client::new("https://httpbin.org".to_string());  // Instantiate `Client` with your API's base URL
+c.get("/status/200", false); // Make a GET request to your endpoint
 ```
 
 ## License

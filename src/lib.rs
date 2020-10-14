@@ -7,6 +7,16 @@
 // except according to those terms.
 
 //! **roy** is a high-level library for consuming RESTful APIs.
+//!
+//! ## Usage:
+//! ```
+//! use roy::Client; // import into scope
+//! let c = roy::Client::new("https://httpbin.org".to_string());  // Instantiate `Client` with your API's base URL
+//! c.get("/status/200", false); // Make a GET request to your endpoint
+//! ```
+//!
+//! **roy** also has methods that support POST, PUT, PATCH, and DELETE http verbs,
+//! all of which are used in the same way as the `get()` method.
 
 use reqwest::{Response, header};
 
