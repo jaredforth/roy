@@ -12,6 +12,11 @@
   - [About](#about)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [GET](#get)
+    - [POST](#post)
+    - [PATCH](#patch)
+    - [PUT](#put)
+    - [DELETE](#delete)
   - [License](#license)
   - [Why the name Roy?](#why-the-name-roy)
 
@@ -34,11 +39,43 @@ roy = "0.1"
 
 ## Usage
 
+To use any of the methods on the `roy::Client` struct, it has to be instantiated as follows:
+
 ```rust
 use roy::Client; // import into scope
-
 let c = roy::Client::new("https://httpbin.org".to_string());  // Instantiate `Client` with your API's base URL
-c.get("/status/200", false); // Make a GET request to your endpoint
+```
+
+All of the examples below assume that the struct has already been instanciated. 
+
+### GET
+
+```rust
+c.get("/get", false); // Make a GET request to your endpoint
+```
+
+### POST
+
+```rust
+c.post("/post", "{some: data}"); // Make a POST request to your endpoint
+```
+
+### PATCH
+
+```rust
+c.patch("/patch", "{some: data}"); // Make a PATCH request to your endpoint
+```
+
+### PUT
+
+```rust
+c.put("/put", "{some: data}"); // Make a PUT request to your endpoint
+```
+
+### DELETE
+
+```rust
+c.delete("/delete"); // Make a DELETE request to your endpoint
 ```
 
 ## License
