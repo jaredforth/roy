@@ -3,7 +3,6 @@
 [![Crate](https://img.shields.io/crates/v/roy.svg)](https://crates.io/crates/roy)
 [![API](https://docs.rs/roy/badge.svg)](https://docs.rs/roy)
 ![Crates.io](https://img.shields.io/crates/l/roy)
-![Crates.io](https://img.shields.io/crates/v/roy)
 ![GitHub top language](https://img.shields.io/github/languages/top/jaredforth/roy)
 ![Crates.io](https://img.shields.io/crates/d/roy)
 
