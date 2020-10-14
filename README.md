@@ -46,7 +46,7 @@ use roy::Client; // import into scope
 let c = roy::Client::new("https://httpbin.org".to_string());  // Instantiate `Client` with your API's base URL
 ```
 
-All of the examples below assume that the struct has already been instanciated. 
+All of the examples below assume that the struct has already been instantiated.
 
 ### GET
 
