@@ -15,7 +15,7 @@ pub struct Client {
     /// API base URL
     pub base_url: String,
     /// The reqwest wrapper
-    client: reqwest::Client,
+    client: reqwest::Client
 }
 
 impl Client {
@@ -115,13 +115,13 @@ impl Client {
     /// let c = Client::new("https://httpbin.org".to_string());
     /// assert_eq!(block_on(c.put("/put", "{data}")).is_some(), true);
     /// ```
-        pub async fn put<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
-            let res = self.client.put(&self.format_url(endpoint))
-                .json(&data)
-                .send()
-                .await.ok()?;
-            Some(res)
-        }
+    pub async fn put<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
+        let res = self.client.put(&self.format_url(endpoint))
+            .json(&data)
+            .send()
+            .await.ok()?;
+        Some(res)
+    }
     /// Generic function to send a GET request to an endpoint
     ///
     /// ## Usage:
@@ -141,6 +141,35 @@ impl Client {
                 .await.ok()?;
         } else {
             res = self.client.get(&self.format_url(endpoint))
+                .send()
+                .await.ok()?;
+        }
+        Some(res)
+    }
+    /// Generic function to send a GET request to an endpoint
+    /// without formating to use the base url.
+    ///
+    /// Regardless of the value of `base_url`, this function
+    /// will send a GET request to the absolute URL passed
+    /// as the `url` parameter.
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://doesnotexist.example.io".to_string());
+    /// assert_eq!(block_on(c.get_abs("https://httpbin.org", false)).is_some(), true);
+    /// ```
+    pub async fn get_abs(&self, url: &str, single: bool) -> Option<Response> {
+        let res;
+        if single {
+            res = self.client.get(url)
+                .header("Accept", "application/vnd.pgrst.object+json")
+                .send()
+                .await.ok()?;
+        } else {
+            res = self.client.get(url)
                 .send()
                 .await.ok()?;
         }
