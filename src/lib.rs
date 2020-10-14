@@ -66,7 +66,7 @@ impl Client {
     /// assert_eq!(block_on(c.post("/post", "{data}")).is_some(), true);
     /// ```
     pub async fn post<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
-        let res = self.client.post(&format_url(endpoint))
+        let res = self.client.post(&self.format_url(endpoint))
             .json(&data)
             .send()
             .await.ok()?;
@@ -83,7 +83,7 @@ impl Client {
     /// assert_eq!(block_on(c.delete("/delete")).is_some(), true);
     /// ```
     pub async fn delete(&self, endpoint: &str) -> Option<Response> {
-        let res = self.client.delete(&format_url(endpoint))
+        let res = self.client.delete(&self.format_url(endpoint))
             .send()
             .await.ok()?;
         Some(res)
@@ -99,7 +99,7 @@ impl Client {
     /// assert_eq!(block_on(c.patch("/patch", "{data}")).is_some(), true);
     /// ```
     pub async fn patch<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
-        let res = self.client.patch(&format_url(endpoint))
+        let res = self.client.patch(&self.format_url(endpoint))
             .json(&data)
             .send()
             .await.ok()?;
@@ -116,7 +116,7 @@ impl Client {
     /// assert_eq!(block_on(c.put("/put", "{data}")).is_some(), true);
     /// ```
         pub async fn put<T: serde::ser::Serialize + std::fmt::Debug>(&self, endpoint: &str, data: T) -> Option<Response> {
-            let res = self.client.put(&format_url(endpoint))
+            let res = self.client.put(&self.format_url(endpoint))
                 .json(&data)
                 .send()
                 .await.ok()?;
@@ -135,29 +135,27 @@ impl Client {
     pub async fn get(&self, endpoint: &str, single: bool) -> Option<Response> {
         let res;
         if single {
-            res = self.client.get(&format_url(endpoint))
+            res = self.client.get(&self.format_url(endpoint))
                 .header("Accept", "application/vnd.pgrst.object+json")
                 .send()
                 .await.ok()?;
         } else {
-            res = self.client.get(&format_url(endpoint))
+            res = self.client.get(&self.format_url(endpoint))
                 .send()
                 .await.ok()?;
         }
         Some(res)
     }
-}
-
-/// Format a URL
-///
-/// ## Usage:
-///
-/// ```
-/// use roy::format_url;
-///
-///
-/// assert_eq!(format_url("test"), "https://rivaldata.tech/test")
-/// ```
-pub fn format_url(endpoint: &str) -> String {
-    format!("https://rivaldata.tech/{}", endpoint)
+    /// Format a URL
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::Client;
+    ///
+    /// let c = Client::new("https://httpbin.org".to_string());
+    /// assert_eq!(c.format_url("/test"), "https://httpbin.org/test")
+    /// ```
+    pub fn format_url(&self, endpoint: &str) -> String {
+        format!("{}{}", self.base_url, endpoint)
+    }
 }
