@@ -1,3 +1,7 @@
+# Roy
+
+A high-level library for consuming RESTful APIs.
+
 [![Build Status](https://travis-ci.com/jaredforth/roy.svg?branch=master)](https://travis-ci.com/jaredforth/roy)
 [![Build status](https://ci.appveyor.com/api/projects/status/gffkkb1qwafutmii?svg=true)](https://ci.appveyor.com/project/jaredforth/roy)
 [![Crate](https://img.shields.io/crates/v/roy.svg)](https://crates.io/crates/roy)
@@ -6,10 +10,11 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/jaredforth/roy)
 ![Crates.io](https://img.shields.io/crates/d/roy)
 
-# roy
+## Table of Contents
 
-- [roy](#roy)
-  - [About](#about)
+- [Roy](#roy)
+  - [Table of Contents](#table-of-contents)
+  - [Documentation](#documentation)
   - [Installation](#installation)
   - [Usage](#usage)
     - [GET](#get)
@@ -18,13 +23,9 @@
     - [PUT](#put)
     - [DELETE](#delete)
   - [License](#license)
-  - [Why the name Roy?](#why-the-name-roy)
+  - [Behind the Name](#behind-the-name)
 
-## About
-
-This crate is a high-level library for consuming RESTful APIs.
-
-Documentation:
+## Documentation
 
 - [API Reference](https://docs.rs/roy)
 
@@ -43,7 +44,7 @@ To use any of the methods on the `roy::Client` struct, it has to be instantiated
 
 ```rust
 // import into scope
-use roy::Client; 
+use roy::Client;
 // Instantiate `Client` with your API's base URL
 let c = roy::Client::new("https://httpbin.org".to_string());  
 ```
@@ -82,13 +83,13 @@ c.delete("/delete"); // Make a DELETE request to your endpoint
 
 ## License
 
-**roy** is distributed under the terms of both the MIT license and the
+**Roy** is distributed under the terms of both the MIT license and the
 Apache License (Version 2.0).
 
 See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT), and
 [COPYRIGHT](COPYRIGHT) for details.
 
-## Why the name Roy?
+## Behind the Name
 
 This crate is named after [Roy Fielding](https://en.wikipedia.org/wiki/Roy_Fielding), who defined Representational State Transfer. According to [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer#History): 
 
