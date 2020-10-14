@@ -42,8 +42,10 @@ roy = "0.1"
 To use any of the methods on the `roy::Client` struct, it has to be instantiated as follows:
 
 ```rust
-use roy::Client; // import into scope
-let c = roy::Client::new("https://httpbin.org".to_string());  // Instantiate `Client` with your API's base URL
+// import into scope
+use roy::Client; 
+// Instantiate `Client` with your API's base URL
+let c = roy::Client::new("https://httpbin.org".to_string());  
 ```
 
 All of the examples below assume that the struct has already been instantiated.
