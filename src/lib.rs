@@ -51,12 +51,19 @@ impl Client {
     /// use roy::Client;
     /// use tokio_test::block_on;
     ///
-    /// let c = Client::new_auth("https://httpbin.org".to_string(), "");
+    /// let c = Client::new_auth("https://httpbin.org".to_string(), "".to_string());
     /// assert_eq!(block_on(c.get("/bearer", false)).is_some(), true);
     /// ```
-    pub fn new_auth(base_url: String, auth_token: &'static str) -> Client {
+    pub fn new_auth(base_url: String, auth_token: String) -> Client {
         let mut headers = header::HeaderMap::new();
-        headers.insert(header::AUTHORIZATION, header::HeaderValue::from_static(auth_token));
+        match header::HeaderValue::from_str(auth_token.as_str()) {
+            Ok(val) => {
+                headers.insert(header::AUTHORIZATION, val);
+            }
+            Err(e) => {
+                println!("{:?}", e)
+            }
+        }
         Client {
             base_url,
             client: reqwest::Client::builder()
