@@ -51,10 +51,20 @@ let c = roy::Client::new("https://httpbin.org".to_string());
 
 All of the examples below assume that the struct has already been instantiated.
 
+#### Quick Start
+
+`roy` provides a high-level `request` function that can be used to quickly make requests. To make a 
+
 ### GET
 
 ```rust
 c.get("/get", false); // Make a GET request to your endpoint
+```
+
+*or*
+
+```rust
+c.request("/get", roy::RequestMethod::GET, None); // Make GET request using alternate `request` function
 ```
 
 ### POST
@@ -63,10 +73,22 @@ c.get("/get", false); // Make a GET request to your endpoint
 c.post("/post", "{some: data}"); // Make a POST request to your endpoint
 ```
 
+*or*
+
+```rust
+c.request("/post", roy::RequestMethod::POST, Some("{}")); // Make POST request using alternate `request` function
+```
+
 ### PATCH
 
 ```rust
 c.patch("/patch", "{some: data}"); // Make a PATCH request to your endpoint
+```
+
+*or*
+
+```rust
+c.request("/patch", roy::RequestMethod::PATCH, Some("{}")); // Make PATCH request using alternate `request` function
 ```
 
 ### PUT
@@ -74,11 +96,22 @@ c.patch("/patch", "{some: data}"); // Make a PATCH request to your endpoint
 ```rust
 c.put("/put", "{some: data}"); // Make a PUT request to your endpoint
 ```
+*or*
+
+```rust
+c.request("/put", roy::RequestMethod::PUT, Some("{}")); // Make PUT request using alternate `request` function
+```
 
 ### DELETE
 
 ```rust
 c.delete("/delete"); // Make a DELETE request to your endpoint
+```
+
+*or*
+
+```rust
+c.request("/delete", roy::RequestMethod::DELETE, None); // Make DELETE request using alternate `request` function
 ```
 
 ## License
