@@ -204,4 +204,64 @@ impl Client {
     pub fn format_url(&self, endpoint: &str) -> String {
         format!("{}{}", self.base_url, endpoint)
     }
+    /// Make a request to the specified endpoint with a specified request method.
+    ///
+    /// ## Usage:
+    /// ```
+    /// use roy::{Client, RequestMethod};
+    /// use tokio_test::block_on;
+    ///
+    /// let c = Client::new("https://httpbin.org".to_string());
+    ///
+    /// assert!(block_on(c.request("/get", RequestMethod::GET, None)).is_some());
+    /// assert!(block_on(c.request("/post", RequestMethod::POST, Some("{}"))).is_some());
+    /// assert!(block_on(c.request("/patch", RequestMethod::PATCH, Some("{}"))).is_some());
+    /// assert!(block_on(c.request("/put", RequestMethod::PUT, Some("{}"))).is_some());
+    /// assert!(block_on(c.request("/delete", RequestMethod::DELETE, None)).is_some());
+    /// ```
+    pub async fn request(&self, endpoint: &str, method: RequestMethod, data: Option<&str>) -> Option<Response> {
+        let d = match data {
+            Some(d) => d,
+            None => ""
+        };
+        match method {
+            RequestMethod::GET => {
+                self.get(endpoint, false).await
+            }
+            RequestMethod::POST => {
+                self.post(endpoint, d).await
+            }
+            RequestMethod::PUT => {
+                self.put(endpoint, d).await
+
+            }
+            RequestMethod::PATCH => {
+                self.patch(endpoint, d).await
+
+            }
+            RequestMethod::DELETE => {
+                self.delete(endpoint).await
+            }
+        }
+    }
+}
+
+/// Lists the possible HTTP request methods that can be used.
+///
+/// #### MDN Description:
+///
+/// HTTP defines a set of request methods to indicate the desired action to be performed for a given resource.
+/// Although they can also be nouns, these request methods are sometimes referred to as HTTP verbs.
+///
+pub enum RequestMethod {
+    /// The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+    GET,
+    /// The POST method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server.
+    POST,
+    /// The PUT method replaces all current representations of the target resource with the request payload.
+    PUT,
+    /// The PATCH method is used to apply partial modifications to a resource.
+    PATCH,
+    /// The DELETE method deletes the specified resource.
+    DELETE
 }
