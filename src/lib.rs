@@ -220,6 +220,7 @@ impl Client {
     /// assert!(block_on(c.request("/delete", RequestMethod::DELETE, None)).is_some());
     /// ```
     pub async fn request(&self, endpoint: &str, method: RequestMethod, data: Option<&str>) -> Option<Response> {
+        // Extract data from Option
         let d = match data {
             Some(d) => d,
             None => ""
@@ -233,11 +234,9 @@ impl Client {
             }
             RequestMethod::PUT => {
                 self.put(endpoint, d).await
-
             }
             RequestMethod::PATCH => {
                 self.patch(endpoint, d).await
-
             }
             RequestMethod::DELETE => {
                 self.delete(endpoint).await
